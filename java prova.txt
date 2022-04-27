@@ -1,0 +1,40 @@
+public class loja{
+
+String modelo;
+string cor;
+string formato;
+float preço;
+
+
+public Sofa(String modelo, String cor, String formato, Float preço){
+
+this.modelo = modelo;
+this.cor = cor;
+this.preço = preço;
+this.formato = formato;
+}
+
+String getModelo(){
+return modelo;
+}
+
+void setModelo(String modelo){
+this.modelo = modelo;
+
+float getPreco(){
+return preco;
+}
+
+float setPreco(float preco){
+this.preco = preco;
+}
+
+public void Informacao(){
+
+        System.out.println("Modelo: " + modelo + "\n" +
+        "Cor: " + cor + "\n" +
+        "Formato: " + formato + "\n" +
+        "Preco: " + preço + "\n" +);
+    }
+
+
