@@ -1,0 +1,228 @@
+package dto;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import database.ConexaoBanco;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
+
+public class Controller {
+
+    @FXML
+    private Button btnCarroSalvar;
+
+    @FXML
+    private Button btnClienteSalvar;
+
+    @FXML
+    private Button btnFuncionarioSalvarEFinalizar;
+
+    @FXML
+    private Label labelCarroAno;
+
+    @FXML
+    private Label labelCarroCambioAutomatico;
+
+    @FXML
+    private Label labelCarroCor;
+
+    @FXML
+    private Label labelCarroMarca;
+
+    @FXML
+    private Label labelCarroModelo;
+
+    @FXML
+    private Label labelCarroPlaca;
+
+    @FXML
+    private Label labelCarroPotencia;
+
+    @FXML
+    private Label labelCarroPreco;
+
+    @FXML
+    private Label labelClienteCPF;
+
+    @FXML
+    private Label labelClienteEmail;
+
+    @FXML
+    private Label labelClienteNome;
+
+    @FXML
+    private Label labelClienteTelefone;
+
+    @FXML
+    private Label labelFuncionarioCPF;
+
+    @FXML
+    private Label labelFuncionarioCargo;
+
+    @FXML
+    private Label labelFuncionarioEmail;
+
+    @FXML
+    private Label labelFuncionarioNome;
+
+    @FXML
+    private Label labelFuncionarioTelefone;
+
+    @FXML
+    private Tab tabCarro;
+
+    @FXML
+    private Tab tabCliente;
+
+    @FXML
+    private Tab tabFuncionario;
+    
+    @FXML
+    private TabPane tabPaneLocadora;
+
+    @FXML
+    private TextField textFieldCarroAno;
+
+    @FXML
+    private TextField textFieldCarroCambioAutomatico;
+
+    @FXML
+    private TextField textFieldCarroCor;
+
+    @FXML
+    private TextField textFieldCarroMarca;
+
+    @FXML
+    private TextField textFieldCarroModelo;
+
+    @FXML
+    private TextField textFieldCarroPlaca;
+
+    @FXML
+    private TextField textFieldCarroPotencia;
+
+    @FXML
+    private TextField textFieldCarroPreco;
+
+    @FXML
+    private TextField textFieldClienteCPF;
+
+    @FXML
+    private TextField textFieldClienteEmail;
+
+    @FXML
+    private TextField textFieldClienteNome;
+
+    @FXML
+    private TextField textFieldClienteTelefone;
+
+    @FXML
+    private TextField textFieldFuncionarioCPF;
+
+    @FXML
+    private TextField textFieldFuncionarioCargo;
+
+    @FXML
+    private TextField textFieldFuncionarioEmail;
+
+    @FXML
+    private TextField textFieldFuncionarioNome;
+
+    @FXML
+    private TextField textFieldFuncionarioTelefone;
+	
+    @FXML
+    void btnClienteSalvar(ActionEvent event) throws SQLException, ClassNotFoundException {
+    	 	
+    	
+    	Cliente cliente1 = new Cliente();
+		cliente1.setNome(textFieldClienteNome.getText());
+		cliente1.setCpf(textFieldClienteCPF.getText());
+		cliente1.setTelefone(textFieldClienteTelefone.getText());
+		cliente1.setEmail(textFieldClienteEmail.getText());
+		
+		System.out.println("Dados do Cliente" + "\n" + "\n" + "Nome: " + cliente1.getNome() + "\n" + "CPF: " + 
+		cliente1.getCpf() + "\n" + "Telefone: " + cliente1.getTelefone() + "\n" + "Email: " + cliente1.getEmail() + "\n" );
+		
+		textFieldClienteNome.setText("");
+		textFieldClienteCPF.setText("");
+		textFieldClienteTelefone.setText("");
+		textFieldClienteEmail.setText("");
+        Connection connection = ConexaoBanco.getInstancia().getConnection();
+		
+		String sql = "INSERT INTO tbl_cliente(nome_cliente, cpf_cliente, telefone_cliente, email_cliente) values (?, ?, ?, ?)";
+		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		
+		Cliente cliente = null;
+		statement.setString (1, cliente.getNome ());
+		statement.setString (2, cliente.getCpf());
+		statement.setString (3, cliente.getTelefone());
+		statement.setString (4, cliente.getEmail());
+		statement.execute();
+		connection.close();
+		
+			
+    }
+    
+    @FXML
+    void btnCarroSalvar(ActionEvent event) {
+    	
+    	Carro carro1 = new Carro();
+    	carro1.setModelo(textFieldCarroModelo.getText());
+    	carro1.setMarca(textFieldCarroMarca.getText());
+    	carro1.setAno(textFieldCarroAno.getText());
+    	carro1.setCor(textFieldCarroCor.getText());
+    	carro1.setPotencia(textFieldCarroPotencia.getText());
+    	carro1.setCambioAutomatico(textFieldCarroCambioAutomatico.getText());
+    	carro1.setPlaca(textFieldCarroPlaca.getText());
+    	carro1.setPreco(textFieldCarroPreco.getText());
+    	
+		System.out.println("Dados do Carro" + "\n" + "\n" + "Placa: " + carro1.getPlaca() + "\n" + "Modelo: " + carro1.getModelo() + "\n" + "Cor: " + carro1.getCor() + "\n" + "Marca" 
+		+ carro1.getMarca() + "\n" + "Cambio Automático: " + carro1.getCambioAutomatico() + "\n" + "Ano: " + carro1.getAno() + 
+		"\n" + "Potência: " + carro1.getPotencia() + "\n" + "Preço: " + carro1.getPreco() + "\n" );
+		
+		textFieldCarroModelo.setText("");
+    	textFieldCarroMarca.setText("");
+    	textFieldCarroAno.setText("");
+    	textFieldCarroCor.setText("");
+    	textFieldCarroPotencia.setText("");
+    	textFieldCarroCambioAutomatico.setText("");
+    	textFieldCarroPlaca.setText("");
+    	textFieldCarroPreco.setText("");
+
+    }
+
+    @FXML
+    void btnFuncionarioSalvarEFinalizar(ActionEvent event) {
+    	
+    	Funcionario funcionario1 = new Funcionario();
+		
+    	funcionario1.setNome(textFieldFuncionarioNome.getText());
+    	funcionario1.setTelefone(textFieldFuncionarioTelefone.getText());
+    	funcionario1.setCpf(textFieldFuncionarioCPF.getText());
+    	funcionario1.setEmail(textFieldFuncionarioEmail.getText());
+    	funcionario1.setCargo(textFieldFuncionarioCargo.getText()); 
+			
+    	System.out.println("Dados do Funcionário" + "\n" + "\n" + "Funcionário: " + funcionario1.getNome()+ "\n" +
+    	"Cargo: " + funcionario1.getCargo() + "\n" + "CPF: " + funcionario1.getCpf() + "\n" + "Telefone: " 
+    			+ funcionario1.getTelefone() + "\n" + "Email: " + funcionario1.getEmail());
+    	
+    	textFieldFuncionarioNome.setText("");
+    	textFieldFuncionarioTelefone.setText("");
+    	textFieldFuncionarioCPF.setText("");
+    	textFieldFuncionarioEmail.setText("");
+    	textFieldFuncionarioCargo.setText(""); 
+
+    }
+    
+    
+
+}

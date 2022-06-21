@@ -1,0 +1,22 @@
+package dataAccessObj;
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import database.ConexaoBanco;
+
+public class ClienteDAO {
+	
+	public void inserir(ClienteDAO cliente) throws ClassNotFoundException, SQLException {
+		Connection connection = ConexaoBanco.getInstancia().getConnection();
+		
+		String sql = "INSERT INTO tbl_Cliente(id_, nome_cliente, cpf_cliente, telefone_cliente, email_cliente) values (?, ?, ?, ?, ?)";
+		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		
+		statement.setString (1, cliente.getId cliente());
+	}
+	
+}
